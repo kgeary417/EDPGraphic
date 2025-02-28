@@ -1,0 +1,161 @@
+/* General reset */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+}
+
+.wheel {
+  position: relative;
+  width: 750px; /* 25% larger than before */
+  height: 750px; /* 25% larger than before */
+  background-color: #fff;
+}
+
+.full-wheel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1; /* Background layer */
+}
+
+.card {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+  cursor: pointer;
+  transform-origin: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Cards above the background */
+}
+
+/* Hover effect to flip the card */
+.card:hover .inner {
+  transform: rotateY(180deg); /* Flip the inner content */
+}
+
+/* Make sure the back side scales and stays visible when hovered */
+.card:hover .back {
+  transform: rotateY(0deg) scale(2); /* Enlarge the back */
+  z-index: 3; /* Ensure the back is in front */
+  backface-visibility: visible; /* Hide the front face behind */
+}
+
+/* Front face - hidden when hovered */
+.card .front {
+  transform: rotateY(0deg); /* No flip when not hovered */
+}
+
+/* Back face - shown when hovered */
+.card .back {
+  transform: rotateY(180deg); /* Back side initially rotated */
+  background-color: transparent; /* Optional background for back */
+  transform-origin: center;
+  z-index: 3; /* Keep the back below the front initially */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure the back image rotates but text stays normal */
+.card .back .image {
+  transform: rotateY(180deg); /* Rotate the image, but not the text */
+  z-index: 1; /* Ensure the image is under the text */
+}
+
+/* Ensure text stays unflipped */
+.card .back .text {
+  transform: rotateY(0deg); /* Text remains upright */
+  z-index: 2; /* Ensure text is above the image */
+}
+
+/* Inner container for the front and back */
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Front and back of the card */
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back side when flipped */
+}
+
+/* Front face */
+.front {
+  z-index: 2; /* Front face visible by default */
+  transform: rotateY(0deg); /* No flip when not hovered */
+}
+
+/* Back face */
+.back {
+  transform: rotateY(0deg); /* Back side initially rotated */
+  background-color: #f8f8f8; /* Optional background for back */
+  transform-origin: center;
+  z-index: 1; /* Keep the back below the front initially */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Positioning the cards - closer to the center */
+.ask {
+  top: 33%;
+  left: 48.75%;
+  transform: translate(-50%, -50%);
+}
+
+.imagine {
+  top: 43.2%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+}
+
+.plan {
+  top: 62%;
+  left: 64%;
+  transform: translate(-50%, -50%);
+}
+
+.create {
+  top: 69%;
+  left: 47.2%;
+  transform: translate(-50%, -50%);
+}
+
+.test {
+  top: 61%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.improve {
+  top: 40%;
+  left: 31.8%;
+  transform: translate(-50%, -50%);
+}
+
+/* Ensures images scale properly within the card */
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures images do not get distorted */
+}
